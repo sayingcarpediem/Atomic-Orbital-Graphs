@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    FILE* gp = _popen("gnuplot -persistent", "w");
+
+    fprintf(gp, "set title '1s Orbital Probability Density'\n");
+    fprintf(gp, "set xlabel 'Radius x'\n");
+    fprintf(gp, "set ylabel 'y'\n");
+    fprintf(gp, "set zlabel 'Probability'\n");
+    fprintf(gp, "set grid\n");
+
+    fprintf(gp, "set xrange [0:10]\n");
+    fprintf(gp, "set yrange [0:0.6]\n");
+
+    fprintf(gp, "splot x*x*exp(-2*x)"
+    "with pm3d title '1s Orbital'\n");
+
+    _pclose(gp);
+    return 0;
+}
