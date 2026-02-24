@@ -1,0 +1,24 @@
+﻿#include <stdio.h>
+
+int main()
+{
+    FILE* gp = _popen("gnuplot -persistent", "w");
+
+    fprintf(gp, "set title '2p Orbital Probability Density'\n");
+    fprintf(gp, "set xlabel 'x'\n");
+    fprintf(gp, "set ylabel 'y'\n");
+    fprintf(gp, "set zlabel 'Probability'\n");   
+    fprintf(gp, "set grid\n");
+
+   
+    fprintf(gp, "set xrange [-8:8]\n");
+    fprintf(gp, "set yrange [-8:8]\n");
+
+   
+    fprintf(gp,
+        "splot (y*y)*exp(-sqrt(x*x+y*y))"
+        "with pm3d title '2p Orbital'\n");
+
+    _pclose(gp);
+    return 0;
+}
